@@ -26,21 +26,21 @@ class DataBase:
             #     'SELECT password FROM users WHERE user = %s', [username])
             # user_password = self.c.fetchone()
             self.c.execute(
-                "SELECT password FROM users WHERE user = '%s'" % username))
-            user_password=self.c.fetchone()
+                "SELECT password FROM users WHERE user = '%s'" % username)
+            user_password = self.c.fetchone()
 
         except (AttributeError, MySQLdb.OperationalError):
             self.connect()
             self.c.execute(
                 'SELECT password FROM users WHERE username = %s', [username])
-            user_password=self.c.fetchone()
+            user_password = self.c.fetchone()
 
         except MySQLdb.Error as e:
             try:
-                message='MySQL Error [%d]: %s' % (e.args[0], e.args[1])
+                message = 'MySQL Error [%d]: %s' % (e.args[0], e.args[1])
                 return message, 0
             except IndexError:
-                message='MySQL Error: %s' % str(e)
+                message = 'MySQL Error: %s' % str(e)
                 return message, 0
         return user_password, 1
 
@@ -58,10 +58,10 @@ class DataBase:
             self.db.commit()
         except MySQLdb.Error as e:
             try:
-                message='MySQL Error [%d]: %s' % (e.args[0], e.args[1])
+                message = 'MySQL Error [%d]: %s' % (e.args[0], e.args[1])
                 return message, 0
             except IndexError:
-                message='MySQL Error: %s' % str(e)
+                message = 'MySQL Error: %s' % str(e)
                 return message, 0
         return '', 1
 
@@ -69,18 +69,18 @@ class DataBase:
         try:
             self.c.execute(
                 'SELECT id, text, author, title, subtitle, date FROM gossips')
-            gossips=self.c.fetchall()
+            gossips = self.c.fetchall()
         except (AttributeError, MySQLdb.OperationalError):
             self.connect()
             self.c.execute(
                 'SELECT id, text, author, title, subtitle, date FROM gossips LIMIT')
-            gossips=self.c.fetchall()
+            gossips = self.c.fetchall()
         except MySQLdb.Error as e:
             try:
-                message='MySQL Error [%d]: %s' % (e.args[0], e.args[1])
+                message = 'MySQL Error [%d]: %s' % (e.args[0], e.args[1])
                 return message, 0
             except IndexError:
-                message='MySQL Error: %s' % str(e)
+                message = 'MySQL Error: %s' % str(e)
                 return message, 0
         return gossips, 1
 
@@ -88,18 +88,18 @@ class DataBase:
         try:
             self.c.execute(
                 'SELECT id, text, author, title, subtitle, date FROM gossips WHERE title  LIKE %s', ['%' + search_str + '%'])
-            gossips=self.c.fetchall()
+            gossips = self.c.fetchall()
         except (AttributeError, MySQLdb.OperationalError):
             self.connect()
             self.c.execute(
                 'SELECT id, text, author, title, subtitle, date FROM gossips WHERE title  LIKE %s', ['%' + search_str + '%'])
-            gossips=self.c.fetchall()
+            gossips = self.c.fetchall()
         except MySQLdb.Error as e:
             try:
-                message='MySQL Error [%d]: %s' % (e.args[0], e.args[1])
+                message = 'MySQL Error [%d]: %s' % (e.args[0], e.args[1])
                 return message, 0
             except IndexError:
-                message='MySQL Error: %s' % str(e)
+                message = 'MySQL Error: %s' % str(e)
                 return message, 0
 
         return gossips, 1
@@ -108,18 +108,18 @@ class DataBase:
         try:
             self.c.execute(
                 'SELECT id, text, author, title, subtitle, date FROM gossips WHERE id = %s', [id])
-            gossip=self.c.fetchone()
+            gossip = self.c.fetchone()
         except (AttributeError, MySQLdb.OperationalError):
             self.connect()
             self.c.execute(
                 'SELECT id, text, author, title, subtitle, date FROM gossips WHERE id = %s', [id])
-            gossip=self.c.fetchone()
+            gossip = self.c.fetchone()
         except MySQLdb.Error as e:
             try:
-                message='MySQL Error [%d]: %s' % (e.args[0], e.args[1])
+                message = 'MySQL Error [%d]: %s' % (e.args[0], e.args[1])
                 return message, 0
             except IndexError:
-                message='MySQL Error: %s' % str(e)
+                message = 'MySQL Error: %s' % str(e)
                 return message, 0
         return gossip, 1
 
@@ -127,19 +127,19 @@ class DataBase:
         try:
             self.c.execute(
                 'SELECT author, comment, date FROM comments WHERE gossip_id = %s', [id])
-            comments=self.c.fetchall()
+            comments = self.c.fetchall()
             # comments = (1,2)
         except (AttributeError, MySQLdb.OperationalError):
             self.connect()
             self.c.execute(
                 'SELECT author, comment, date FROM comments WHERE gossip_id = %s', [id])
-            comments=self.c.fetchall()
+            comments = self.c.fetchall()
         except MySQLdb.Error as e:
             try:
-                message='MySQL Error [%d]: %s' % (e.args[0], e.args[1])
+                message = 'MySQL Error [%d]: %s' % (e.args[0], e.args[1])
                 return message, 0
             except IndexError:
-                message='MySQL Error: %s' % str(e)
+                message = 'MySQL Error: %s' % str(e)
                 return message, 0
         if comments == ():
             return None, 1
@@ -159,10 +159,10 @@ class DataBase:
             self.db.commit()
         except MySQLdb.Error as e:
             try:
-                message='MySQL Error [%d]: %s' % (e.args[0], e.args[1])
+                message = 'MySQL Error [%d]: %s' % (e.args[0], e.args[1])
                 return message, 0
             except IndexError:
-                message='MySQL Error: %s' % str(e)
+                message = 'MySQL Error: %s' % str(e)
                 return message, 0
         return '', 1
 
@@ -180,10 +180,10 @@ class DataBase:
             self.db.commit()
         except MySQLdb.Error as e:
             try:
-                message='MySQL Error [%d]: %s' % (e.args[0], e.args[1])
+                message = 'MySQL Error [%d]: %s' % (e.args[0], e.args[1])
                 return message, 0
             except IndexError:
-                message='MySQL Error: %s' % str(e)
+                message = 'MySQL Error: %s' % str(e)
                 return message, 0
         return '', 1
 
@@ -195,10 +195,10 @@ class DataBase:
         except (AttributeError, MySQLdb.OperationalError, MySQLdb.Error) as e:
             self.connect()
             try:
-                message='MySQL Error [%d]: %s' % (e.args[0], e.args[1])
+                message = 'MySQL Error [%d]: %s' % (e.args[0], e.args[1])
                 return message, 0
             except IndexError:
-                message='MySQL Error: %s' % str(e)
+                message = 'MySQL Error: %s' % str(e)
                 return message, 0
         return '', 1
 
@@ -210,10 +210,10 @@ class DataBase:
         except (AttributeError, MySQLdb.OperationalError, MySQLdb.Error) as e:
             self.connect()
             try:
-                message='MySQL Error [%d]: %s' % (e.args[0], e.args[1])
+                message = 'MySQL Error [%d]: %s' % (e.args[0], e.args[1])
                 return message, 0
             except IndexError:
-                message='MySQL Error: %s' % str(e)
+                message = 'MySQL Error: %s' % str(e)
                 return message, 0
         return '',
 
@@ -225,9 +225,9 @@ class DataBase:
         except (AttributeError, MySQLdb.OperationalError, MySQLdb.Error) as e:
             self.connect()
             try:
-                message='MySQL Error [%d]: %s' % (e.args[0], e.args[1])
+                message = 'MySQL Error [%d]: %s' % (e.args[0], e.args[1])
                 return message, 0
             except IndexError:
-                message='MySQL Error: %s' % str(e)
+                message = 'MySQL Error: %s' % str(e)
                 return message, 0
         return '',
