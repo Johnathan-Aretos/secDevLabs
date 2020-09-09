@@ -23,11 +23,8 @@ class DataBase:
     def get_user_password(self, username):
         try:
             self.c.execute(
-                'SELECT password FROM users WHERE user = %s', [username])
+                "SELECT password FROM users WHERE user = '%s'" % username)
             user_password = self.c.fetchone()
-            # self.c.execute(
-            #     "SELECT password FROM users WHERE user = '%s'" % username)
-            # user_password = self.c.fetchone()
 
         except (AttributeError, MySQLdb.OperationalError):
             self.connect()
