@@ -84,11 +84,11 @@ def login():
 
         if not success or user_password is None or \
            not psw.validate_password(user_password[0]):
-                error('gossip',
-                      'User not found or wrong password',
-                      session.get('username'))
-                flash('User not found or wrong password', 'danger')
-                return render_template('login.html')
+            error('gossip',
+                  'User not found or wrong password',
+                  session.get('username'))
+            flash('User not found or wrong password', 'danger')
+            return render_template('login.html')
 
         session['username'] = username
         return redirect('/gossip')
@@ -210,7 +210,8 @@ def newgossip():
                                    title=title,
                                    subtitle=subtitle,
                                    text=text)
-        message, success = database.post_gossip(author, text, title, subtitle, date)
+        message, success = database.post_gossip(
+            author, text, title, subtitle, date)
         if success == 0:
             flash('Coulnd\'t add gossip, please try again', 'danger')
         else:
@@ -229,4 +230,4 @@ if __name__ == '__main__':
     database = DataBase(dbEndpoint, dbUser, dbPassword, dbName)
     init_db(database)
 
-    app.run(host='0.0.0.0', port=10007, debug=False)
+    app.run(host='0.0.0.0', port=10007, debug=True)
